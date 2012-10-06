@@ -13,7 +13,7 @@ object Build extends sbt.Build
       organization  := "com.olchovy",
       version       := "0.1.0",
       scalaVersion  := "2.9.1",
-      scalacOptions := Seq("-deprecation", "-encoding", "utf8"),
+      scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8"),
 
       mainClass     in assembly := Some("com.olchovy.numonitor.cep.Boot"),
       jarName       in assembly := "topology.jar",

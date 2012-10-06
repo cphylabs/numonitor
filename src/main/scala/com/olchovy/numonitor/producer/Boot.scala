@@ -9,7 +9,11 @@ object Boot
     Service.buildFromProperties("/producer.properties") { props =>
       val producerConfig = new ProducerConfig(props)
       val producer = new Producer[String, Int](producerConfig)
-      new ProducerService(producer)
+
+      if(props.getProperty("service.batch", "off") == "off")
+        new ProducerService(producer)
+      else
+        new BatchProducerService(producer)
     } match {
       case Right(service) => service.start
       case Left(error) => System.err.println(error.getMessage)
